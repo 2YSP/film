@@ -1,0 +1,22 @@
+server:
+  port: 80
+  context-path: /
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/db_film?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
+    password: 1234
+    username: root
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  thymeleaf:
+    cache: false
+
+imageFilePath: E://idea/film/src/main/webapp/static/filmImage/
+
+
+
