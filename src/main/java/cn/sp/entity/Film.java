@@ -2,6 +2,7 @@ package cn.sp.entity;
 
 import cn.sp.util.CustomDateTimeSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -18,6 +19,7 @@ public class Film {
     @GeneratedValue
     private Integer id;//编号
 
+    @NotEmpty(message = "电影名称不能为空")
     @Column(length = 200)
     private String name;//电影名称
 

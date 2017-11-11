@@ -13,6 +13,8 @@ public class IndexController {
     @RequestMapping("/")
     public String index(ModelMap model){
         model.addAttribute("title","首页");
+        model.addAttribute("mainPage","film/indexFilm");
+        model.addAttribute("mainPageKey","#f");
         return "index";
     }
     
