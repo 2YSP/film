@@ -56,11 +56,13 @@ public class FilmServiceImpl implements FilmService{
 		long count =  filmRepository.count(
 				(Root<Film> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) -> {
 					Predicate predicate = criteriaBuilder.conjunction();
-					if (StringUtil.isNotEmpty(film.getName())) {
-						predicate.getExpressions().add(criteriaBuilder.like(root.get("name"), "%" + film.getName().trim() + "%"));
-					}
-					if (film.getHot() != null && film.getHot() == 1){
-						predicate.getExpressions().add(criteriaBuilder.equal(root.get("hot"),film.getHot()));
+					if (film != null){
+						if (StringUtil.isNotEmpty(film.getName())) {
+							predicate.getExpressions().add(criteriaBuilder.like(root.get("name"), "%" + film.getName().trim() + "%"));
+						}
+						if (film.getHot() != null && film.getHot() == 1){
+							predicate.getExpressions().add(criteriaBuilder.equal(root.get("hot"),film.getHot()));
+						}
 					}
 
 					return predicate;
@@ -77,6 +79,16 @@ public class FilmServiceImpl implements FilmService{
 	@Override
 	public Film findById(Integer id) {
 		return filmRepository.findOne(id);
+	}
+
+	@Override
+	public Film getLast(Integer id) {
+		return filmRepository.getLast(id);
+	}
+
+	@Override
+	public Film getNext(Integer id) {
+		return filmRepository.getNext(id);
 	}
 
 }

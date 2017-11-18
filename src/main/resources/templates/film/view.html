@@ -1,0 +1,17 @@
+<meta charset="UTF-8"></meta>
+<div id="f">
+	<div class="data_list">
+		<div class="data_list_title">
+		<img src="/static/images/view_icon.png" />
+		电影详细信息</div>
+		<div>
+			<div class="film_title"><h3><strong th:text="${film.title}"></strong></h3></div>
+		</div>
+		<div class="film_publishDate">
+			发布时间：<font th:text="${#dates.format(film.publishDate,'yyyy-MM-dd HH:mm:ss')}"></font>
+		</div>
+		<div class="film_content" th:utext="${film.content}">
+		</div>
+		<div class="film_lastAndNextPage" th:utext="${pageCode}"></div>
+	</div>
+</div>
