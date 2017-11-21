@@ -47,7 +47,7 @@ public class WebSiteInfoServiceImpl implements WebSiteInfoService {
         long count =  webSiteInfoRepository.count(
                 (Root<WebSiteInfo> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) -> {
                     Predicate predicate = criteriaBuilder.conjunction();
-                    if (StringUtil.isNotEmpty(webSiteInfo.getInfo())) {
+                    if (webSiteInfo != null &&StringUtil.isNotEmpty(webSiteInfo.getInfo())) {
                         predicate.getExpressions().add(criteriaBuilder.like(root.get("info"), "%" + webSiteInfo.getInfo().trim() + "%"));
                     }
 

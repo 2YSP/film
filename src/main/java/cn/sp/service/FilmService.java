@@ -39,4 +39,6 @@ public interface FilmService {
 	 * @return
 	 */
 	Film getNext(Integer id);
+
+	List<Film> randomList(Integer i);
 }

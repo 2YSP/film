@@ -42,6 +42,10 @@ body{
     height: 2100px;
 }
 
+.data_list .rImageDatas{
+    height: 550px;
+}
+
 .data_list .lImageDatas{
     height: 1300px;
 }

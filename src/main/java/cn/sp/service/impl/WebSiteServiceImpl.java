@@ -47,12 +47,15 @@ public class WebSiteServiceImpl implements WebSiteService {
 //        },pageable);
         Page<WebSite> webSitePage = webSiteRepository.findAll((Root<WebSite> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) ->{
             Predicate predicate = criteriaBuilder.conjunction();
-            if (StringUtil.isNotEmpty(website.getName())){
-                predicate.getExpressions().add(criteriaBuilder.like(root.get("name"),"%"+website.getName().trim()+"%"));
+            if (website != null){
+                if (StringUtil.isNotEmpty(website.getName())){
+                    predicate.getExpressions().add(criteriaBuilder.like(root.get("name"),"%"+website.getName().trim()+"%"));
+                }
+                if (StringUtil.isNotEmpty(website.getUrl())){
+                    predicate.getExpressions().add(criteriaBuilder.like(root.get("url"),"%"+website.getUrl().trim()+"%"));
+                }
             }
-            if (StringUtil.isNotEmpty(website.getUrl())){
-                predicate.getExpressions().add(criteriaBuilder.like(root.get("url"),"%"+website.getUrl().trim()+"%"));
-            }
+
             return predicate;
         },pageable);
         return webSitePage.getContent();
@@ -64,12 +67,16 @@ public class WebSiteServiceImpl implements WebSiteService {
        long count =  webSiteRepository.count(
                 (Root<WebSite> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) -> {
                     Predicate predicate = criteriaBuilder.conjunction();
-                    if (StringUtil.isNotEmpty(website.getName())) {
-                        predicate.getExpressions().add(criteriaBuilder.like(root.get("name"), "%" + website.getName().trim() + "%"));
+                    if ( website != null){
+
+                        if (StringUtil.isNotEmpty(website.getName())) {
+                            predicate.getExpressions().add(criteriaBuilder.like(root.get("name"), "%" + website.getName().trim() + "%"));
+                        }
+                        if (StringUtil.isNotEmpty(website.getUrl())) {
+                            predicate.getExpressions().add(criteriaBuilder.like(root.get("url"), "%" + website.getUrl().trim() + "%"));
+                        }
                     }
-                    if (StringUtil.isNotEmpty(website.getUrl())) {
-                        predicate.getExpressions().add(criteriaBuilder.like(root.get("url"), "%" + website.getUrl().trim() + "%"));
-                    }
+
                     return predicate;
                 }
         );

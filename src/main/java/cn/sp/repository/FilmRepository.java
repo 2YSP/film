@@ -6,6 +6,8 @@ import cn.sp.entity.Film;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
+
 /**
  * 电影Repository接口
  * @author 2YSP
@@ -17,4 +19,7 @@ public interface FilmRepository extends JpaRepository<Film, Integer>,JpaSpecific
 
     @Query(value = "SELECT * FROM t_film WHERE id > ?1 ORDER BY id  LIMIT 1",nativeQuery = true)
     Film getNext(Integer id);
+
+    @Query(value = "SELECT * FROM t_film ORDER BY RAND() LIMIT ?1",nativeQuery = true)
+    List<Film> randomList(Integer i);
 }

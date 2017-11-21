@@ -2,6 +2,7 @@ package cn.sp.controller;
 
 import cn.sp.entity.Film;
 import cn.sp.service.FilmService;
+import cn.sp.service.WebSiteInfoService;
 import cn.sp.util.PageUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -23,6 +24,9 @@ public class FilmController {
 
     @Resource
     private FilmService filmService;
+
+    @Resource
+    private WebSiteInfoService webSiteInfoService;
     /**
      * 电影名称模糊查询
      * @param s_film
@@ -87,6 +91,9 @@ public class FilmController {
         mav.addObject("mainPageKey","#f");
         mav.addObject("title",film.getTitle());
         mav.addObject("pageCode", getUpAndDownCode(filmService.getLast(id),filmService.getNext(id)));
+        //随机获取8个电影
+        mav.addObject("randomFilmList",filmService.randomList(8));
+        mav.addObject("webSiteInfoList",webSiteInfoService.getByFilmId(id));
         mav.setViewName("index");
         return mav;
     }
